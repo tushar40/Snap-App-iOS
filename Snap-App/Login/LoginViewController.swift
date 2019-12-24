@@ -77,7 +77,7 @@ class LoginViewController: UIViewController {
     //MARK:- Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -134,6 +134,10 @@ class LoginViewController: UIViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 
 //MARK:- Textfield delegate methods
@@ -151,6 +155,7 @@ extension LoginViewController: UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
 }
